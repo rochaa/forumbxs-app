@@ -2,3 +2,18 @@ html,
 body {
     font-family: "Baloo Da 2", cursive;
 }
+
+.user-menu img {
+    width: 35px;
+    height: 35px;
+}
+
+.forum-img-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 3px;
+}
+
+.error {
+    color: #ff0000;
+}
