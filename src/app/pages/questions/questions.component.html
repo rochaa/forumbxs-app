@@ -7,10 +7,20 @@
   <app-post-form [formNewPost]="formNewQuestion"></app-post-form>
 </app-modal>
 
+<!-- Filtro para as perguntas -->
+<div class="form-inline">
+  <h2 class="mt-2"><i class="fa fa-history mr-2"></i>Últimas perguntas</h2>
+  <input [(ngModel)]="searchText" class="form-control-sm ml-4 mr-4" placeholder="Palavra chave na pergunta">
+
+  <div class="form-check ">
+    <input (change)="getNoAnswer($event)" class="form-check-input" type="checkbox" id="noAnswer">
+    <label class="form-check-label" for="noAnswer"> Perguntas não respondidas </label>
+  </div>
+</div>
+
 <!-- Exibição da lista com todas as perguntas -->
-<h2 class="mt-2"><i class="fa fa-history mr-2"></i>Últimas perguntas</h2>
-<div class="list-unstyled mt-3" *ngIf="questions">
-  <div *ngFor="let question of questions">
-    <app-post [post]="question" (like)="like(question.id)" ></app-post>
+<div class="list-unstyled mt-3" *ngIf="questionsFiltered">
+  <div *ngFor="let question of questionsFiltered | filter : searchText">
+    <app-post [post]="question" (like)="like(question.id)"></app-post>
   </div>
 </div>

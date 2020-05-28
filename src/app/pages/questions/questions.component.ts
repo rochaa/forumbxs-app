@@ -11,7 +11,9 @@ import { NotificationHelper } from 'src/app/helpers/notification.helper';
 export class QuestionsComponent implements OnInit {
   displayNewQuestion: Boolean;
   formNewQuestion: FormGroup;
+  searchText: string = "";
   questions: QuestionModel[] = null;
+  questionsFiltered: QuestionModel[] = null;
 
   constructor(
     private service: QuestionService,
@@ -38,7 +40,10 @@ export class QuestionsComponent implements OnInit {
 
   loadQuestions() {
     this.service.getAll().subscribe(
-      (questions) => { this.questions = questions; }
+      (questions) => {
+        this.questions = questions;
+        this.questionsFiltered = this.questions;
+      }
     );
   }
 
@@ -67,5 +72,16 @@ export class QuestionsComponent implements OnInit {
         this.notification.showErrors(result);
       }
     );
+  }
+
+  getNoAnswer(event: any) {
+    let showOnlyNoAnswer = event.currentTarget.checked;
+    if (showOnlyNoAnswer) {
+      this.questionsFiltered = this.questions.filter(s => {
+        return s.answers && s.answers.length == 0;
+      });
+    } else {
+      this.questionsFiltered = this.questions;
+    }
   }
 }

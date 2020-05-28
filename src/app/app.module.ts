@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Base
@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 // Pipes
 import { DateTimeFormatPipe } from './pipes/dateTimeFormat.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 // Modulos externos
 import { ToastrModule } from 'ngx-toastr';
@@ -36,7 +37,8 @@ import { HomeComponent } from './pages/home/home.component';
     ModalComponent,
     DateTimeFormatPipe,
     PostComponent,
-    PostFormComponent
+    PostFormComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ import { HomeComponent } from './pages/home/home.component';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FormsModule,
     ToastrModule.forRoot({ timeOut: 4000, preventDuplicates: true })
   ],
   providers: [],
