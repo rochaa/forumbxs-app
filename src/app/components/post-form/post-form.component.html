@@ -1,0 +1,16 @@
+<form [formGroup]="formNewPost">
+    <div class="form-group">
+        <label for="user">Usuário</label>
+        <input type="text" class="form-control" id="user" formControlName="user">
+        <small class="error" *ngIf="formNewPost.controls.user.invalid">
+            <strong>Informar o usuário</strong>
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="text">Pergunta</label>
+        <textarea class="form-control" id="text" rows="3" formControlName="text"></textarea>
+        <small class="error" *ngIf="formNewPost.controls.text.invalid">
+            <strong>Informar o texto da pergunta</strong>
+        </small>
+    </div>
+</form>

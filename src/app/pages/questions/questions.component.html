@@ -1,37 +1,16 @@
 <!-- Abertura do modal para criação de nova pergunta -->
-<button class="btn btn-outline-primary m-3" (click)="openNewQuestion()">Nova pergunta</button>
+<button class="btn btn-sm btn-outline-primary m-3" (click)="openNewQuestion()">Nova pergunta</button>
 
 <!-- Modal com o formulário de criação de nova pergunta -->
 <app-modal title="Nova pergunta" buttonName="Publicar" (confirm)="saveQuestion()" (cancel)="cancelNewQuestion()"
   [show]="displayNewQuestion" [confirmDisabled]="formNewQuestion.invalid">
-  <form [formGroup]="formNewQuestion">
-    <div class="form-group">
-      <label for="user">Usuário</label>
-      <input type="text" class="form-control" id="user" formControlName="user">
-      <small class="error" *ngIf="formNewQuestion.controls.user.invalid">
-        <strong>Informar o usuário</strong>
-      </small>
-    </div>
-    <div class="form-group">
-      <label for="text">Pergunta</label>
-      <textarea class="form-control" id="text" rows="3" formControlName="text"></textarea>
-      <small class="error" *ngIf="formNewQuestion.controls.text.invalid">
-        <strong>Informar o texto da pergunta</strong>
-      </small>
-    </div>
-  </form>
+  <app-post-form [formNewPost]="formNewQuestion"></app-post-form>
 </app-modal>
 
 <!-- Exibição da lista com todas as perguntas -->
 <h2 class="mt-2"><i class="fa fa-history mr-2"></i>Últimas perguntas</h2>
-<ul class="list-unstyled mt-3" *ngIf="questions">
-  <li class="media my-4" *ngFor="let question of questions">
-    <img src="assets/user-icon.png" class="mr-3">
-    <div class="media-body">
-      <h5 class="mt-0 mb-1 font-weight-bold">{{ question.user }}</h5>
-      <p> {{ question.text }} </p> <br>
-      <label class="mt-1 font-weight-bold">{{ question.creationDate | dateTimeFormat }}</label> <br>
-      <a class="mt-1" href="#">{{ question.answers.length }} Respostas</a> <br>
-    </div>
-  </li>
-</ul>
+<div class="list-unstyled mt-3" *ngIf="questions">
+  <div *ngFor="let question of questions">
+    <app-post [post]="question"></app-post>
+  </div>
+</div>

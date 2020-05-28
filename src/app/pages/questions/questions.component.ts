@@ -16,9 +16,9 @@ export class QuestionsComponent implements OnInit {
   constructor(
     private service: QuestionService,
     private toastr: ToastrService,
-    private fbNewQuestion: FormBuilder
+    private fbNewPost: FormBuilder
   ) {
-    this.formNewQuestion = this.fbNewQuestion.group({
+    this.formNewQuestion = this.fbNewPost.group({
       text: ['', Validators.required],
       user: ['', Validators.required]
     });

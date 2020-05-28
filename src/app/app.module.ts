@@ -18,6 +18,8 @@ import { ToastrModule } from 'ngx-toastr';
 // Componentes compartilhados
 import { HeaderComponent } from './components/header/header.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { PostComponent } from './components/post/post.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
 
 // Paginas do sistema
 import { QuestionsComponent } from './pages/questions/questions.component';
@@ -32,7 +34,9 @@ import { HomeComponent } from './pages/home/home.component';
     AnswersComponent,
     HomeComponent,
     ModalComponent,
-    DateTimeFormatPipe
+    DateTimeFormatPipe,
+    PostComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule,

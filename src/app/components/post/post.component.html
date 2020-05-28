@@ -1,0 +1,18 @@
+<div class="media my-4">
+    <img src="assets/user-icon.png" class="mr-3">
+    <div class="media-body">
+        <div class="">
+            <h5 class="mt-0 mb-1 font-weight-bold">{{ post.user }}</h5>
+            <span [class.font-size-up-2]="showAnswersDetails">{{ post.text }}</span><br>
+            <label class="mt-1 font-weight-bold">{{ post.creationDate | dateTimeFormat }}</label> <br>
+            <a *ngIf="!showAnswersDetails && post.answers" class="mt-1" href="answers/{{post.id}}">
+                {{ post.answers.length }} Respostas</a> <br>
+        </div>
+
+        <div *ngIf="showAnswersDetails && post.answers" class="list-unstyled mt-3">
+            <div *ngFor="let answer of post.answers">
+                <app-post [post]="answer"></app-post>
+            </div>
+        </div>
+    </div>
+</div>

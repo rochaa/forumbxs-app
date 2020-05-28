@@ -17,3 +17,7 @@ body {
 .error {
     color: #ff0000;
 }
+
+.font-size-up-2 {
+    font-size: 2em;
+}

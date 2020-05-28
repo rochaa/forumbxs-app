@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, children: [
       { path: '', component: QuestionsComponent },
-      { path: 'answers', component: AnswersComponent }
+      { path: 'answers/:questionId', component: AnswersComponent }
     ],
   },
 ];

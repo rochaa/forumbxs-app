@@ -1,1 +1,11 @@
-<p>answers works!</p>
+<!-- Abertura do modal para criação de nova resposta -->
+<button class="btn btn-sm btn-outline-primary m-3" (click)="openNewAnswer()">Nova resposta</button>
+
+<!-- Modal com o formulário de criação de nova resposta -->
+<app-modal title="Nova resposta" buttonName="Publicar" (confirm)="saveAnswer()" (cancel)="cancelNewAnswer()"
+  [show]="displayNewAnswer" [confirmDisabled]="formNewAnswer.invalid">
+  <app-post-form [formNewPost]="formNewAnswer"></app-post-form>
+</app-modal>
+
+<!-- Exibição da pergunta com todas as respostas -->
+<app-post [post]="question" [showAnswersDetails]="true"></app-post>

@@ -20,4 +20,8 @@ export class QuestionService {
   getAll(): Observable<QuestionModel[]> {
     return this.client.get<QuestionModel[]>(this.baseURL);
   }
+
+  getById(id: string): Observable<QuestionModel> {
+    return this.client.get<QuestionModel>(`${this.baseURL}/${id}`);
+  }
 }
