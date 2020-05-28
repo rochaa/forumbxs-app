@@ -1,17 +1,31 @@
-<div class="media my-4">
+<div class="media my-4" *ngIf="post">
+    <!-- Foto do usuário -->
     <img src="assets/user-icon.png" class="mr-3">
-    <div class="media-body">
-        <div class="">
-            <h5 class="mt-0 mb-1 font-weight-bold">{{ post.user }}</h5>
-            <span [class.font-size-up-2]="showAnswersDetails">{{ post.text }}</span><br>
-            <label class="mt-1 font-weight-bold">{{ post.creationDate | dateTimeFormat }}</label> <br>
-            <a *ngIf="!showAnswersDetails && post.answers" class="mt-1" href="answers/{{post.id}}">
-                {{ post.answers.length }} Respostas</a> <br>
-        </div>
 
+    <div class="media-body">
+        <!-- Nome do usuário -->
+        <h5 class="mt-0 mb-1 font-weight-bold">{{ post.user }}</h5>
+
+        <!-- Texto do post (Pergunta ou resposta) -->
+        <span [class.font-size-up-2]="showAnswersDetails">{{ post.text }}</span><br>
+
+        <!-- Data da postagem -->
+        <label class="mt-1 font-weight-bold">{{ post.creationDate | dateTimeFormat }}</label> <br>
+
+        <!-- Exibição das curtidas. :) -->
+        <button class="btn like" (click)="onLike(post.id)">
+            <i class="fa fa-thumbs-up"></i>
+            <span class="badge">{{ post.likes }}</span>
+        </button>
+
+        <!-- Quantidade de respostas (Exibição apenas no painel de perguntas) -->
+        <a *ngIf="!showAnswersDetails && post.answers" class="mt-1" href="answers/{{post.id}}">
+            {{ post.answers.length }} Respostas</a> <br>
+
+        <!-- Exibição da lista de respostas -->
         <div *ngIf="showAnswersDetails && post.answers" class="list-unstyled mt-3">
             <div *ngFor="let answer of post.answers">
-                <app-post [post]="answer"></app-post>
+                <app-post [post]="answer" (click)="onLike(answer.id)"></app-post>
             </div>
         </div>
     </div>

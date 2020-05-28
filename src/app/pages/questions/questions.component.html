@@ -11,6 +11,6 @@
 <h2 class="mt-2"><i class="fa fa-history mr-2"></i>Últimas perguntas</h2>
 <div class="list-unstyled mt-3" *ngIf="questions">
   <div *ngFor="let question of questions">
-    <app-post [post]="question"></app-post>
+    <app-post [post]="question" (like)="like(question.id)" ></app-post>
   </div>
 </div>

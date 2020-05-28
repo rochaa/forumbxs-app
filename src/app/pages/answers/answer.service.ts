@@ -16,4 +16,8 @@ export class AnswerService {
   post(model: AnswerModel): Observable<ResultModel> {
     return this.client.post<ResultModel>(this.baseURL, model);
   }
+
+  like(id: string): Observable<ResultModel> {
+    return this.client.post<ResultModel>(`${this.baseURL}/${id}/like`, null);
+  }
 }

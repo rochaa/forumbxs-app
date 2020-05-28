@@ -8,4 +8,4 @@
 </app-modal>
 
 <!-- Exibição da pergunta com todas as respostas -->
-<app-post [post]="question" [showAnswersDetails]="true"></app-post>
+<app-post [post]="question" [showAnswersDetails]="true" (like)="like($event)"></app-post>

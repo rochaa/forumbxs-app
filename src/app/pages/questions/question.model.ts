@@ -6,5 +6,6 @@ export class QuestionModel {
         public text: string,
         public user: string,
         public creationDate: Date,
+        public likes: number,
         public answers: AnswerModel[]) { }
 }

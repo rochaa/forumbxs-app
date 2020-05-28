@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionService } from './question.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { QuestionModel } from './question.model';
+import { NotificationHelper } from 'src/app/helpers/notification.helper';
 
 @Component({
   selector: 'app-questions',
@@ -15,8 +15,8 @@ export class QuestionsComponent implements OnInit {
 
   constructor(
     private service: QuestionService,
-    private toastr: ToastrService,
-    private fbNewPost: FormBuilder
+    private fbNewPost: FormBuilder,
+    private notification: NotificationHelper
   ) {
     this.formNewQuestion = this.fbNewPost.group({
       text: ['', Validators.required],
@@ -46,19 +46,25 @@ export class QuestionsComponent implements OnInit {
     this.service.post(this.formNewQuestion.value).subscribe(
       (result) => {
         if (result.sucess) {
-          this.toastr.success(result.message);
+          this.notification.showSuccess(result.message);
           this.displayNewQuestion = false;
           this.formNewQuestion.reset();
           this.loadQuestions();
         }
       }, (result) => {
-        if (result.error && result.error.data) {
-          result.error.data.forEach((notification: string) => {
-            this.toastr.error(notification);
-          });
-        } else {
-          this.toastr.error(result.error.message);
+        this.notification.showErrors(result);
+      }
+    );
+  }
+
+  like(id: string) {
+    this.service.like(id).subscribe(
+      (result) => {
+        if (result.sucess) {
+          this.loadQuestions();
         }
+      }, (result) => {
+        this.notification.showErrors(result);
       }
     );
   }

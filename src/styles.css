@@ -21,3 +21,10 @@ body {
 .font-size-up-2 {
     font-size: 2em;
 }
+
+.like {
+    padding: 0px;
+    margin-right: 7px;
+    color: green;
+    font-size: 1.2em;
+}

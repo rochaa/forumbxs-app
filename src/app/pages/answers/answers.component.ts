@@ -4,7 +4,7 @@ import { QuestionModel } from '../questions/question.model';
 import { AnswerService } from './answer.service';
 import { QuestionService } from '../questions/question.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { NotificationHelper } from 'src/app/helpers/notification.helper';
 
 @Component({
   selector: 'app-answers',
@@ -18,10 +18,10 @@ export class AnswersComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService,
     private answerService: AnswerService,
     private questionService: QuestionService,
-    private fbNewPost: FormBuilder) {
+    private fbNewPost: FormBuilder,
+    private notification: NotificationHelper) {
     this.formNewAnswer = this.fbNewPost.group({
       text: ['', Validators.required],
       user: ['', Validators.required],
@@ -63,19 +63,25 @@ export class AnswersComponent implements OnInit {
     this.answerService.post(this.formNewAnswer.value).subscribe(
       (result) => {
         if (result.sucess) {
-          this.toastr.success(result.message);
+          this.notification.showSuccess(result.message);
           this.displayNewAnswer = false;
           this.formNewAnswer.reset();
           this.loadQuestionWithAnswers();
         }
       }, (result) => {
-        if (result.error && result.error.data) {
-          result.error.data.forEach((notification: string) => {
-            this.toastr.error(notification);
-          });
-        } else {
-          this.toastr.error(result.error.message);
+        this.notification.showErrors(result);
+      }
+    );
+  }
+
+  like(id: string) {
+    this.answerService.like(id).subscribe(
+      (result) => {
+        if (result.sucess) {
+          this.loadQuestionWithAnswers();
         }
+      }, (result) => {
+        this.notification.showErrors(result);
       }
     );
   }

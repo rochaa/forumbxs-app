@@ -17,6 +17,10 @@ export class QuestionService {
     return this.client.post<ResultModel>(this.baseURL, model);
   }
 
+  like(id: string): Observable<ResultModel> {
+    return this.client.post<ResultModel>(`${this.baseURL}/${id}/like`, null);
+  }
+
   getAll(): Observable<QuestionModel[]> {
     return this.client.get<QuestionModel[]>(this.baseURL);
   }
